@@ -31,6 +31,6 @@ SmsAero API
     $status = $api->getStatus(2558711);
 
     // Запрос на получение новой подписи
-    $sign = $api->signRequest("newsign")
+    $sign = $api->signRequest("newsign");
 ```
 Все подробности об ответах API можно посмотреть в официальной документации [API SmsAero](http://smsaero.ru/api/)
