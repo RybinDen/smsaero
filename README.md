@@ -1,36 +1,42 @@
-SmsAero API
+  SmsAero API
 =========
 
-Быстрая отправка sms-сообщений через API сервиса SmsAero
+Быстрая отправка sms-сообщений через API сервиса SmsAero для фреймворка Yii2
 
 
 Использование
 --------------
- - Подключаем класс и создаем его экземпляр
+ - скачиваем класс (в примере сохранен в папке components) и настраиваем
 
 ```php
-    include('smsaeroapi.php');
-    // Если хотите получать ответы от сервиса в формате json, то
-    // необходимо установить 3-й параметр в true
-    $api = new SmsAero('ваш_email', 'ваш_пароль', false);
+'components' => [
+...
+'sms' => [
+'class' => 'app\components\SmsAero', // указать путь до файла 
+'login' => 'Ваш_логин',
+'password' => 'md5_вашего_пароля',
+'json' => true, // установить true чтобы получать ответ в формате json
+],
+...
+]
 ```
 
  - Пользуемся!
 
 ```php
     // Отправка сообщения
-    $api->sendMessage("mysign", 79999999999, "тестовое сообщение");
+    Yii::$app->sms->sendMessage("mysign", 79999999999, "тестовое сообщение");
 
     // Запрос на получение подписей
-    $signs = $api->getSigns();
+     Yii::$app->sms->getSigns();
 
     // Получение баланса пользователя
-    $balance = $api->getBalance();
+     Yii::$app->sms->getBalance();
 
     // Получение статуса отправленного сообщения
-    $status = $api->getStatus(2558711);
+     Yii::$app->sms->getStatus(2558711);
 
     // Запрос на получение новой подписи
-    $sign = $api->signRequest("newsign");
+     Yii::$app->sms->signRequest("newsign");
 ```
 Все подробности об ответах API можно посмотреть в официальной документации [API SmsAero](http://smsaero.ru/api/)
