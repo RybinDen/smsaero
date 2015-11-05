@@ -6,13 +6,17 @@
 
 Использование
 --------------
- - скачиваем класс (в примере сохранен в папке components) и настраиваем
+ - установка. 
+```
+composer require rybinden/smsaero
+```
+- настраиваем
 
 ```php
 'components' => [
 ...
 'sms' => [
-'class' => 'app\components\SmsAero', // указать путь до файла 
+'class' => 'rybinden\smsaero\SmsAero',
 'login' => 'Ваш_логин',
 'password' => 'md5_вашего_пароля',
 'json' => true, // установить true чтобы получать ответ в формате json
