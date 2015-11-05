@@ -1,4 +1,4 @@
-<? namespace app\components;
+<? namespace rybinden\smsaero;
 use yii\base\Object;
 
 /**
