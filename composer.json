@@ -1,18 +1,30 @@
 {
     "name": "rybinden/smsaero",
-    "description": "Component of the  Yii 2 for send sms by smsaero.ru",
-    "keywords": ["yii2", "component", "sms", "smsaero.ru"],
+    "description": "Расширение для  Yii 2 для отправки смс с помощью сервиса smsaero.ru",
+    "keywords": ["yii2", "extention", "sms", "smsaero.ru"],
     "homepage": "https://github.com/RybinDen/smsaero",
-    "type": "extension",
+    "type": "yii2-extension",
     "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "RybinDen",
+            "email": "mejdugorka@yandex.ru",
+            "homepage": "https://github.com/rybinden/smsaero",
+            "role": "Developer"
+        }
+    ],
     "support": {
         "issues": "https://github.com/RybinDen/smsaero/issues",
         "wiki": "https://github.com/RybinDen/smsaero/wiki/",
         "source": "https://github.com/RybinDen/smsaero"
     },
-    "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": ">=2.0.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "rybinden\\smsaero\\": ""
+        }
     }
 }
