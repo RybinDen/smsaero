@@ -11,6 +11,8 @@ class SmsAero extends Object {
 
     public $login;
     public $password;
+public $sign = '';
+public $digital = false;
     public $json;
     private $_lastHttpCode;
     private static $_curlInstance;
@@ -26,11 +28,10 @@ class SmsAero extends Object {
     public function getBalance()
     {
         $method = "balance";
-        $params = array(
+        $params = [
             "user" => $this->login,
             "password" => $this->password
-        );
-
+        ];
         return $this->sendRequest($method, $params);
     }
 
@@ -38,11 +39,10 @@ class SmsAero extends Object {
     public function getSigns()
     {
         $method = "senders";
-        $params = array(
+        $params = [
             "user" => $this->login,
             "password" => $this->password
-        );
-
+        ];
         return $this->sendRequest($method, $params);
     }
 
@@ -56,7 +56,6 @@ class SmsAero extends Object {
             "password" => $this->password,
             "id" => $msgId
         ];
-
         return $this->sendRequest($method, $params);
     }
 
@@ -65,33 +64,32 @@ class SmsAero extends Object {
     public function signRequest($sign)
     {
         $method = "sign";
-        $params = array(
+        $params = [
             "user" => $this->login,
             "password" => $this->password,
             "sign" => $sign
-        );
-
+        ];
         return $this->sendRequest($method, $params);
     }
 
 // Отправка сообщения
-// $sign string - подтвержденная подпись пользователя
 // $phone string - 11 значный телефонный номер получателя сообщения, начинающийся с 7
 // $text string - текст сообщения
-// $date int - Дата и время отправки сообщения в UNIXTIME
-    public function sendMessage($sign, $phone, $text, $date = false)
+// $date int - Дата и время отправки отложенного сообщения в UNIXTIME
+    public function sendMessage($phone, $text, $date = false)
     {
         $method = "send";
         $params = [
             "user" => $this->login,
             "password" => $this->password,
-            "from" => $sign,
+            "from" => $this->sign,
             "to" => $phone,
             "text" => $text
 ];
+        if ($this->digital != false)
+            $params['digital'] = 1;
         if ($date != false)
             $params['date'] = $date;
-
         return $this->sendRequest($method, $params);
     }
 
@@ -106,7 +104,7 @@ class SmsAero extends Object {
         $url = self::API_URL . $method . '/?' . http_build_query($params);
         curl_setopt(self::$_curlInstance, CURLOPT_URL, $url);
         curl_setopt(self::$_curlInstance, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt(self::$_curlInstance, CURLOPT_USERAGENT, "SMSAERO PHP API CLIENT v" . self::VERSION);
+        curl_setopt(self::$_curlInstance, CURLOPT_USERAGENT, "YII2 PHP API CLIENT v" . self::VERSION);
         $respone = curl_exec(self::$_curlInstance);
         $this->_lastHttpCode = curl_getinfo(self::$_curlInstance, CURLINFO_HTTP_CODE);
 
