@@ -2,17 +2,17 @@
 use yii\base\Object;
 
 /**
- * SmsAero API. Отправка sms-сообщений через API сервиса SmsAero.
-  * https://github.com/RybinDen/SmsAero
- */
+* SmsAero API. Отправка sms-сообщений через API сервиса SmsAero.
+* https://github.com/RybinDen/SmsAero
+*/
 class SmsAero extends Object {
     const API_URL = 'http://gate.smsaero.ru/';
     const VERSION = 1.0;
 
     public $login;
     public $password;
-public $sign = '';
-public $digital = false;
+    public $sign = '';
+    public $digital = false;
     public $json;
     private $_lastHttpCode;
     private static $_curlInstance;
@@ -107,7 +107,6 @@ public $digital = false;
         curl_setopt(self::$_curlInstance, CURLOPT_USERAGENT, "YII2 PHP API CLIENT v" . self::VERSION);
         $respone = curl_exec(self::$_curlInstance);
         $this->_lastHttpCode = curl_getinfo(self::$_curlInstance, CURLINFO_HTTP_CODE);
-
         return $respone;
     }
 }
