@@ -1,30 +1,27 @@
 <? namespace rybinden\smsaero;
-use yii\base\Object;
-
+use yii\base\BaseObject;
 /**
 * SmsAero API. Отправка sms-сообщений через API сервиса SmsAero.
 * https://github.com/RybinDen/SmsAero
 */
-class SmsAero extends Object
+class SmsAero extends BaseObject
 {
-    const API_URL = 'http://gate.smsaero.ru/';
-    const VERSION = 1.0;
-    public $login;
-    public $password;
-    public $sign;
-    public $digital;
-public $type;
-    public $json;
-    private $_lastHttpCode;
-    private static $_curlInstance;
-
+  const API_URL = 'http://gate.smsaero.ru/';
+  const VERSION = 1.0;
+  public $login;
+  public $password;
+  public $sign;
+  public $digital;
+  public $type;
+  public $json;
+  private $_lastHttpCode;
+  private static $_curlInstance;
   public function __destruct()
   {
         // Если у нас открыт экземпляр curl, то нужно его закрывать
         if (!is_null(self::$_curlInstance))
             curl_close(self::$_curlInstance);
   }
-
     // Получение баланса пользователя
   public function getBalance()
   {
